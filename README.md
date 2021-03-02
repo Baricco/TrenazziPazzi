@@ -1,2 +1,2 @@
 # TrenazziPazzi
-Panini Frocio Bastardo
+Panini Frocio Bastardo gay
