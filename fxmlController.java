@@ -9,6 +9,8 @@ import javafx.scene.layout.Pane;
 
 public class fxmlController {
 
+
+
     @FXML
     private ResourceBundle resources;
 
@@ -39,16 +41,48 @@ public class fxmlController {
     @FXML
     private NumberAxis GRAPHX_asseX;
 
+    private String treno = "a";
+
     @FXML
     void initialize() {
-        assert PANE_trenoB != null : "fx:id=\"PANE_trenoB\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert PANE_trenoA != null : "fx:id=\"PANE_trenoA\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert LSTV_perTrenoA != null : "fx:id=\"LSTV_perTrenoA\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert LSTV_perTrenoAB != null : "fx:id=\"LSTV_perTrenoAB\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert LSTV_perTrenoB != null : "fx:id=\"LSTV_perTrenoB\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert GRAPH_grafico != null : "fx:id=\"GRAPH_grafico\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert GRAPHY_asseY != null : "fx:id=\"GRAPHY_asseY\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert GRAPHX_asseX != null : "fx:id=\"GRAPHX_asseX\" was not injected: check your FXML file 'fxml.fxml'.";
+        GestoreTreni gs = new GestoreTreni(treno);
+
+        gs.start();
 
     }
+    
+    private class GestoreTreni extends Thread {
+            private String treno;
+        
+            public GestoreTreni(String treno)
+            {
+                this.treno = treno;
+            }
+        
+            @Override
+            public void run() {
+                while(true)
+                {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {}
+            
+                    if(treno.equals("a"))
+                    {
+                        PANE_trenoA.setStyle("-fx-background-color: green;");
+                        PANE_trenoB.setStyle("-fx-background-color: black;");
+                        treno = "b";
+                    }
+                    else if(treno.equals("b"))
+                    {
+                        PANE_trenoA.setStyle("-fx-background-color: black;");
+                        PANE_trenoB.setStyle("-fx-background-color: green;");
+                        treno = "a";
+                    }
+                }
+                
+        
+        
+            }
+        }
 }
