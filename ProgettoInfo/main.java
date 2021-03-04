@@ -1,14 +1,28 @@
-public class main {
-    
-    public static void main(String args[])
-    {
-        SalaAttesa salaAttesa = new SalaAttesa();
 
-        for(int i = 0;i<10;i++)
-            salaAttesa.aggiungiPersona("rosso");
-        for(int i = 0;i<10;i++)
-            salaAttesa.aggiungiPersona("verde");
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
-        System.out.println(salaAttesa.prelevaPersona("rosso").getColore());
-    }
+
+
+public class Main extends Application {
+
+	@Override
+	public void start (Stage stage) throws Exception {
+
+		Pane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		
+	}
+
+
+
+	public static void main ( String [] args ) { 
+		launch(args); 
+	}
+		
 }
