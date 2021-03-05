@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -42,47 +43,60 @@ public class fxmlController {
     private NumberAxis GRAPHX_asseX;
 
     private String treno = "a";
-
+    private SalaAttesa sa = new SalaAttesa();
+    
     @FXML
     void initialize() {
-        GestoreTreni gs = new GestoreTreni(treno);
-
+        GestoreTreni gs = new GestoreTreni(treno, PANE_trenoB, PANE_trenoA);
+        GestorePersone sp = new GestorePersone(sa);
+        GestoreController gc = new GestoreController();
         gs.start();
+        sp.start();
+        gc.start();
 
     }
     
-    private class GestoreTreni extends Thread {
-            private String treno;
-        
-            public GestoreTreni(String treno)
+    public class GestoreController extends Thread
+    {
+        @Override
+        public void run()
+        {
+            while(true)
             {
-                this.treno = treno;
-            }
-        
-            @Override
-            public void run() {
-                while(true)
-                {
+
                     try {
-                        Thread.sleep(1000);
-                    } catch (Exception e) {}
-            
-                    if(treno.equals("a"))
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) { }
+
+                    if (ModificaLSTV.modifica)
                     {
-                        PANE_trenoA.setStyle("-fx-background-color: green;");
-                        PANE_trenoB.setStyle("-fx-background-color: black;");
-                        treno = "b";
+                        switch(ModificaLSTV.p.getColore())
+                        {
+                            case "rosso":
+                                LSTV_perTrenoA.getItems().add(ModificaLSTV.p.getId());
+                                break;
+                            case "verde":
+                                LSTV_perTrenoAB.getItems().add(ModificaLSTV.p.getId());
+                                break;
+                            case "blu":
+                                LSTV_perTrenoB.getItems().add(ModificaLSTV.p.getId());
+                                break;
+                                
+                        }
+
+                        ModificaLSTV.cambiaModifica(false);
                     }
-                    else if(treno.equals("b"))
-                    {
-                        PANE_trenoA.setStyle("-fx-background-color: black;");
-                        PANE_trenoB.setStyle("-fx-background-color: green;");
-                        treno = "a";
-                    }
-                }
-                
-        
-        
+
             }
         }
+    }      
+        
 }
+
+
+
+    
+   
+
+        
+

@@ -15,7 +15,7 @@
    <children>
       <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="STATION">
+          <Tab text="Station">
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -33,7 +33,7 @@
                   </Pane>
                </content>
             </Tab>
-          <Tab text="GRAPHICS">
+          <Tab text="Graphic">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>

@@ -1,25 +1,31 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class SalaAttesa {
     
     private Queue<Persona> codaBlu = new LinkedList<Persona>(),
                            codaRossa = new LinkedList<Persona>(),
                            codaVerde = new LinkedList<Persona>();
-    public SalaAttesa() {}
+    
+    public SalaAttesa(){}
 
     public void aggiungiPersona(String colore)
     {
+        Persona p = new Persona(colore);
         switch(colore)
         {
             case "rosso":
-                codaRossa.add(new Persona(colore));
+                codaRossa.add(p);
+                ModificaLSTV.aggiungiPersona(p);
                 break;
             case "verde":
-                codaVerde.add(new Persona(colore));
+                codaVerde.add(p);
+                ModificaLSTV.aggiungiPersona(p);
                 break;
             case "blu":
-                codaBlu.add(new Persona(colore));
+                codaBlu.add(p);
+                ModificaLSTV.aggiungiPersona(p);
                 break;
                 
         }

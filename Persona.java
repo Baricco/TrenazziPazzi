@@ -22,4 +22,9 @@ public class Persona
         return colore;
     }
 
+    public int getId()
+    {
+        return id;
+    }
+
 }
