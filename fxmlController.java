@@ -45,7 +45,6 @@ public class fxmlController {
     @FXML
     private NumberAxis GRAPHX_asseX;
 
-    private String postiOccupati = "posti occupati: 0";
     private Treno treno = new Treno('a');
     private SalaAttesa sa = new SalaAttesa(treno);
     
@@ -61,7 +60,11 @@ public class fxmlController {
 
     }
 
-
+    private void aggiornaLabel()
+    {
+        LBL_postiOccupati.setText("posti occupati: " + treno.getCapienza());
+        //System.out.println(treno.getCapienza());
+    }
     
     public class GestoreController extends Thread
     {
@@ -70,54 +73,52 @@ public class fxmlController {
         {
             while(true)
             {
-                try{
-                if(!postiOccupati.equals(LBL_postiOccupati.getText()))
-                    LBL_postiOccupati.setText("posti occupati: " + treno.getCapienza());
-                }catch(Exception e){}
-
+ 
+                   
+                    aggiornaLabel();
                     try {
                         Thread.sleep(10);
-                    } catch (InterruptedException e) { }
+                    
+                        if (ModificaLSTV.modifica == 'a')
+                        {
+                            try{
+                                switch(ModificaLSTV.p.getColore())
+                                {
+                                    case "rosso":
+                                        LSTV_perTrenoA.getItems().add(ModificaLSTV.p.getId());
+                                        break;
+                                    case "verde":
+                                        LSTV_perTrenoAB.getItems().add(ModificaLSTV.p.getId());
+                                        break;
+                                    case "blu":
+                                        LSTV_perTrenoB.getItems().add(ModificaLSTV.p.getId());
+                                        break;
+                                        
+                                }
+                            }catch(Exception e){}
 
-                    if (ModificaLSTV.modifica == 'a')
-                    {
-                        try{
-                            switch(ModificaLSTV.p.getColore())
+                            ModificaLSTV.cambiaModifica('n');
+                        }
+
+                        if (ModificaLSTV.modifica == 'r')
+                        {
+                            switch(ModificaLSTV.getColore())
                             {
                                 case "rosso":
-                                    LSTV_perTrenoA.getItems().add(ModificaLSTV.p.getId());
+                                    LSTV_perTrenoA.getItems().remove(0);
                                     break;
                                 case "verde":
-                                    LSTV_perTrenoAB.getItems().add(ModificaLSTV.p.getId());
+                                    LSTV_perTrenoAB.getItems().remove(0);
                                     break;
                                 case "blu":
-                                    LSTV_perTrenoB.getItems().add(ModificaLSTV.p.getId());
+                                    LSTV_perTrenoB.getItems().remove(0);
                                     break;
                                     
                             }
-                        }catch(Exception e){}
 
-                        ModificaLSTV.cambiaModifica('n');
-                    }
-
-                    if (ModificaLSTV.modifica == 'r')
-                    {
-                        switch(ModificaLSTV.getColore())
-                        {
-                            case "rosso":
-                                LSTV_perTrenoA.getItems().remove(0);
-                                break;
-                            case "verde":
-                                LSTV_perTrenoAB.getItems().remove(0);
-                                break;
-                            case "blu":
-                                LSTV_perTrenoB.getItems().remove(0);
-                                break;
-                                
+                            ModificaLSTV.cambiaModifica('n');
                         }
-
-                        ModificaLSTV.cambiaModifica('n');
-                    }
+                } catch (Exception e) { }
 
             }
         }
