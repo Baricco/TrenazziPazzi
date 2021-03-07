@@ -7,8 +7,11 @@ public class SalaAttesa {
     private Queue<Persona> codaBlu = new LinkedList<Persona>(),
                            codaRossa = new LinkedList<Persona>(),
                            codaVerde = new LinkedList<Persona>();
-    
-    public SalaAttesa(){}
+    private Treno treno;
+    public SalaAttesa(Treno treno)
+    {
+        this.treno = treno;
+    }
 
     public void aggiungiPersona(String colore)
     {
@@ -35,22 +38,46 @@ public class SalaAttesa {
 
     public Persona prelevaPersona(String colore)
     {
-        Persona gianni = new Persona();
+        Persona p = new Persona();
         switch(colore)
         {
             case "rosso":
-                gianni = codaRossa.poll();
+                p = codaRossa.poll();
+                ModificaLSTV.rimuoviPersona(colore);
                 break;
             case "verde":
-                gianni = codaVerde.poll();
+                    p = codaVerde.poll();
+                ModificaLSTV.rimuoviPersona(colore);
                 break;
             case "blu":
-                gianni = codaBlu.poll();
+                p = codaBlu.poll();
+                ModificaLSTV.rimuoviPersona(colore);
                 break;
         }
-        return gianni;
+        return p;
 
     }
 
+    public Treno getTreno()
+    {
+        return treno;
+    }
 
+    public Queue<Persona> getCodaBlu() {
+        return codaBlu;
+    }
+
+
+    public Queue<Persona> getCodaRossa() {
+        return codaRossa;
+    }
+
+
+    public Queue<Persona> getCodaVerde() {
+        return codaVerde;
+    }
+
+    
 }
+
+

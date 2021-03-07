@@ -1,10 +1,10 @@
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
@@ -39,11 +39,15 @@ public class fxmlController {
     @FXML
     private CategoryAxis GRAPHY_asseY;
 
+    @FXML         
+    private Label LBL_postiOccupati;
+
     @FXML
     private NumberAxis GRAPHX_asseX;
 
-    private String treno = "a";
-    private SalaAttesa sa = new SalaAttesa();
+    private String postiOccupati = "posti occupati: 0";
+    private Treno treno = new Treno('a');
+    private SalaAttesa sa = new SalaAttesa(treno);
     
     @FXML
     void initialize() {
@@ -53,8 +57,11 @@ public class fxmlController {
         gs.start();
         sp.start();
         gc.start();
+        
 
     }
+
+
     
     public class GestoreController extends Thread
     {
@@ -63,28 +70,53 @@ public class fxmlController {
         {
             while(true)
             {
+                try{
+                if(!postiOccupati.equals(LBL_postiOccupati.getText()))
+                    LBL_postiOccupati.setText("posti occupati: " + treno.getCapienza());
+                }catch(Exception e){}
 
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) { }
 
-                    if (ModificaLSTV.modifica)
+                    if (ModificaLSTV.modifica == 'a')
                     {
-                        switch(ModificaLSTV.p.getColore())
+                        try{
+                            switch(ModificaLSTV.p.getColore())
+                            {
+                                case "rosso":
+                                    LSTV_perTrenoA.getItems().add(ModificaLSTV.p.getId());
+                                    break;
+                                case "verde":
+                                    LSTV_perTrenoAB.getItems().add(ModificaLSTV.p.getId());
+                                    break;
+                                case "blu":
+                                    LSTV_perTrenoB.getItems().add(ModificaLSTV.p.getId());
+                                    break;
+                                    
+                            }
+                        }catch(Exception e){}
+
+                        ModificaLSTV.cambiaModifica('n');
+                    }
+
+                    if (ModificaLSTV.modifica == 'r')
+                    {
+                        switch(ModificaLSTV.getColore())
                         {
                             case "rosso":
-                                LSTV_perTrenoA.getItems().add(ModificaLSTV.p.getId());
+                                LSTV_perTrenoA.getItems().remove(0);
                                 break;
                             case "verde":
-                                LSTV_perTrenoAB.getItems().add(ModificaLSTV.p.getId());
+                                LSTV_perTrenoAB.getItems().remove(0);
                                 break;
                             case "blu":
-                                LSTV_perTrenoB.getItems().add(ModificaLSTV.p.getId());
+                                LSTV_perTrenoB.getItems().remove(0);
                                 break;
                                 
                         }
 
-                        ModificaLSTV.cambiaModifica(false);
+                        ModificaLSTV.cambiaModifica('n');
                     }
 
             }
