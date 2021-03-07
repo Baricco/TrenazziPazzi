@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,9 +27,9 @@
                         <ListView fx:id="LSTV_perTrenoAB" layoutX="258.0" layoutY="9.0" prefHeight="200.0" prefWidth="83.0" />
                         <ListView fx:id="LSTV_perTrenoB" layoutX="472.0" layoutY="9.0" prefHeight="200.0" prefWidth="83.0" />
                         <Label layoutX="67.0" layoutY="216.0" text="per treno A" />
-                        <Label layoutX="264.0" layoutY="216.0" text="per treno A/B" />                        
-                        <Label fx:id="LBL_postiOccupati" layoutX="224.0" layoutY="330.0" text="posti loccupati:" />
+                        <Label layoutX="264.0" layoutY="216.0" text="per treno A/B" />
                         <Label layoutX="484.0" layoutY="216.0" text="per treno B" />
+                        <ProgressBar fx:id="PB_progressBar" layoutX="236.0" layoutY="330.0" prefHeight="18.0" prefWidth="128.0" progress="0.0" />
                      </children>
                   </Pane>
                </content>
