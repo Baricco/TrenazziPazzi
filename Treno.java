@@ -18,7 +18,7 @@ public class Treno {
     {
         arrivato = true;
         partito = false;
-        new Partenza(20000).start();
+        new Partenza(10000).start();
     }
 
     public char getTipo()

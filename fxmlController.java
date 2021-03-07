@@ -64,7 +64,7 @@ public class fxmlController {
 
     private void aggiornaLabel()
     {
-        PB_progressBar.setProgress( treno.getCapienza()/Treno.MAX_POSTI);
+        PB_progressBar.setProgress( (double)treno.getCapienza()/Treno.MAX_POSTI);
     }
     
     public class GestoreController extends Thread
