@@ -1,28 +1,39 @@
 public class ModificaLSTV {
 
-    public static Persona p ;
-    public static String colore;
-    public static char modifica = 'n';
-
-    public static void aggiungiPersona(Persona p1)
+    public static void aggiungiPersona(Persona p)
     {
-        p = p1;
-        ModificaLSTV.cambiaModifica('a');
+        switch(p.getColore())
+        {
+            case "rosso":
+                fxmlController.OBSL_trenoA.add(p.getId());
+                break;
+            case "verde":
+                fxmlController.OBSL_trenoAB.add(p.getId());
+                break;
+            case "blu":
+                fxmlController.OBSL_trenoB.add(p.getId());
+                break;
+                
+        }
+
+        
     }
 
     public static void rimuoviPersona(String colore1)
     {
-        colore = colore1;
-        ModificaLSTV.cambiaModifica('r');
+        switch(colore1)
+        {
+            case "rosso":
+                fxmlController.OBSL_trenoA.remove(0);
+                break;
+            case "verde":
+                fxmlController.OBSL_trenoAB.remove(0);
+                break;
+            case "blu":
+                fxmlController.OBSL_trenoB.remove(0);
+                break;
+                
+        }
     }
 
-    public synchronized static void cambiaModifica(char b)
-    {
-        modifica = b;
-    }
-
-    public static String getColore()
-    {
-        return colore;
-    }
 }

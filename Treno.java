@@ -5,7 +5,7 @@ public class Treno {
     private char tipo;
     private boolean arrivato = false, partito = false;
     private int capienza = 0;
-    public static final int MAX_POSTI = 150;
+    public static final int MAX_POSTI = 150, TEMP_ARRIVO = 20000;
     public Treno(char tipo)
     {
         capienza = 0;
@@ -18,7 +18,7 @@ public class Treno {
     {
         arrivato = true;
         partito = false;
-        new Partenza(10000).start();
+        new Partenza(TEMP_ARRIVO).start();
     }
 
     public char getTipo()

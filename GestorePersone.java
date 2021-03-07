@@ -19,23 +19,25 @@ public class GestorePersone extends Thread {
         new GestioneSalitePersone().start();
         while(true)
         {
-            if(ModificaLSTV.modifica == 'n')
-            {
-                second = rnd.nextInt(3) + 1;
-                try {
-                    Thread.sleep(second*1000);
-                } catch (Exception e) {}
+            second = rnd.nextInt(3) + 1;
+            try {
+                Thread.sleep(second*1000);
+            } catch (Exception e) {}
 
-                applicaRandom();
-            }
+            applicaRandom();
+
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) { }
         }
-        
+
         
 
     }
+        
+        
+
+    
 
     private void applicaRandom()
     {
@@ -54,7 +56,7 @@ public class GestorePersone extends Thread {
         public void run()
         {
             try {
-                Thread.sleep(10000);
+                Thread.sleep(Treno.TEMP_ARRIVO);
             } catch (InterruptedException e1) {}
 
             while(true)

@@ -1,12 +1,15 @@
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
+
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.Pane;
 
@@ -28,12 +31,16 @@ public class fxmlController {
 
     @FXML
     private ListView<Integer> LSTV_perTrenoA;
-
+    public static ObservableList<Integer> OBSL_trenoA = FXCollections.observableArrayList();
+    
+    
     @FXML
     private ListView<Integer> LSTV_perTrenoAB;
+    public static ObservableList<Integer> OBSL_trenoAB = FXCollections.observableArrayList();
 
     @FXML
     private ListView<Integer> LSTV_perTrenoB;
+    public static ObservableList<Integer> OBSL_trenoB = FXCollections.observableArrayList();
 
     @FXML
     private BarChart<?, ?> GRAPH_grafico;
@@ -53,6 +60,10 @@ public class fxmlController {
     
     @FXML
     void initialize() {
+        LSTV_perTrenoA.setItems(OBSL_trenoA);
+        LSTV_perTrenoAB.setItems(OBSL_trenoAB);
+        LSTV_perTrenoB.setItems(OBSL_trenoB);
+
         GestoreTreni gs = new GestoreTreni(treno, PANE_trenoB, PANE_trenoA);
         GestorePersone sp = new GestorePersone(sa);
         GestoreController gc = new GestoreController();
@@ -73,52 +84,10 @@ public class fxmlController {
         public void run()
         {
             while(true)
-            {
- 
-                   
-                    aggiornaLabel();
-                    try {
-                        Thread.sleep(10);
-                    
-                        if (ModificaLSTV.modifica == 'a')
-                        {
-                            try{
-                                switch(ModificaLSTV.p.getColore())
-                                {
-                                    case "rosso":
-                                        LSTV_perTrenoA.getItems().add(ModificaLSTV.p.getId());
-                                        break;
-                                    case "verde":
-                                        LSTV_perTrenoAB.getItems().add(ModificaLSTV.p.getId());
-                                        break;
-                                    case "blu":
-                                        LSTV_perTrenoB.getItems().add(ModificaLSTV.p.getId());
-                                        break;
-                                        
-                                }
-                            }catch(Exception e){}
-
-                            ModificaLSTV.cambiaModifica('n');
-                        }
-
-                        if (ModificaLSTV.modifica == 'r')
-                        {
-                            switch(ModificaLSTV.getColore())
-                            {
-                                case "rosso":
-                                    LSTV_perTrenoA.getItems().remove(0);
-                                    break;
-                                case "verde":
-                                    LSTV_perTrenoAB.getItems().remove(0);
-                                    break;
-                                case "blu":
-                                    LSTV_perTrenoB.getItems().remove(0);
-                                    break;
-                                    
-                            }
-
-                            ModificaLSTV.cambiaModifica('n');
-                        }
+            {  
+                aggiornaLabel();
+                try {
+                    Thread.sleep(10);
                 } catch (Exception e) { }
 
             }
