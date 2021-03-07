@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 
 import javafx.scene.control.ProgressIndicator;
@@ -30,20 +30,20 @@ public class fxmlController {
     private Pane PANE_trenoA;
 
     @FXML
-    private ListView<Integer> LSTV_perTrenoA;
-    public static ObservableList<Integer> OBSL_trenoA = FXCollections.observableArrayList();
+    private ListView<String> LSTV_perTrenoA;
+    public static ObservableList<String> OBSL_trenoA = FXCollections.observableArrayList();
     
     
     @FXML
-    private ListView<Integer> LSTV_perTrenoAB;
-    public static ObservableList<Integer> OBSL_trenoAB = FXCollections.observableArrayList();
+    private ListView<String> LSTV_perTrenoAB;
+    public static ObservableList<String> OBSL_trenoAB = FXCollections.observableArrayList();
 
     @FXML
-    private ListView<Integer> LSTV_perTrenoB;
-    public static ObservableList<Integer> OBSL_trenoB = FXCollections.observableArrayList();
+    private ListView<String> LSTV_perTrenoB;
+    public static ObservableList<String> OBSL_trenoB = FXCollections.observableArrayList();
 
     @FXML
-    private BarChart<?, ?> GRAPH_grafico;
+    private BarChart<String, Number> GRAPH_grafico;
 
     @FXML
     private CategoryAxis GRAPHY_asseY;
@@ -57,6 +57,8 @@ public class fxmlController {
 
     private Treno treno = new Treno('a');
     private SalaAttesa sa = new SalaAttesa(treno);
+    public static XYChart.Series<String, Number> seriesA = new XYChart.Series<String, Number>();
+    public static XYChart.Series<String, Number> seriesB = new XYChart.Series<String, Number>();
     
     @FXML
     void initialize() {
@@ -67,9 +69,14 @@ public class fxmlController {
         GestoreTreni gs = new GestoreTreni(treno, PANE_trenoB, PANE_trenoA);
         GestorePersone sp = new GestorePersone(sa);
         GestoreController gc = new GestoreController();
+
         gs.start();
         sp.start();
         gc.start();
+
+        GRAPH_grafico.getData().addAll(seriesA, seriesB);
+
+        
     }
 
 
