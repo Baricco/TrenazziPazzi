@@ -45,6 +45,7 @@ public class fxmlController {
     @FXML
     private NumberAxis GRAPHX_asseX;
 
+
     private Treno treno = new Treno('a');
     private SalaAttesa sa = new SalaAttesa(treno);
     
@@ -62,8 +63,13 @@ public class fxmlController {
 
     private void aggiornaLabel()
     {
-        LBL_postiOccupati.setText("posti occupati: " + treno.getCapienza());
-        //System.out.println(treno.getCapienza());
+        String a = "posti occupati: " + treno.getCapienza();
+        try{
+        LBL_postiOccupati.setText(a);
+        }catch(Exception e){
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        }
+        
     }
     
     public class GestoreController extends Thread
