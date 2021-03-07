@@ -7,6 +7,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.Pane;
 
 public class fxmlController {
@@ -41,7 +42,7 @@ public class fxmlController {
     private CategoryAxis GRAPHY_asseY;
 
     @FXML
-    private ProgressBar PB_progressBar;
+    private ProgressIndicator PB_progressBar;
 
     @FXML
     private NumberAxis GRAPHX_asseX;
@@ -58,7 +59,6 @@ public class fxmlController {
         gs.start();
         sp.start();
         gc.start();
-        PB_progressBar.setProgress( 3);
     }
 
 
